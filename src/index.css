@@ -1,3 +1,11 @@
-body{
-    color: #fff;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    color: #66CCF3;
+    border: 2px solid #F7CA16;
+    /*//#3D3F41//#C0ECF8//66CCF3*/
+    /* background-color: #F7CA16; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

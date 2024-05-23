@@ -1,14 +1,13 @@
 import React from 'react'
 
-function Header() {
+const Header = () => {
   return (
-    <div className='header'>
-      <div>
-        <img src="/logo.png" alt="logo image" width={94} height={94} />
-        <h1 className='logo-name'>WEAT-APP</h1>
+    <header className="bg-gradient-to-tr from-blue-100 to-yellow-300 p-4 flex justify-between items-center">
+      <div className="w-100 flex items-center justify-self-center">
+        <img src="/logo.png" alt="Logo" className="" width={120} height={50} />
       </div>
-    </div>
-  )
-}
+    </header>
+  );
+};
 
-export default Header
+export default Header;

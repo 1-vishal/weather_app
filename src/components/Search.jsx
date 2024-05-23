@@ -1,35 +1,48 @@
-import { useState } from 'react';
-import React from 'react'
-import Icon from '../assets/images/search.png'
+import { useState, useEffect } from 'react';
+import React from 'react';
+import axios from 'axios';
+import Icon from '../assets/images/searchlogo.svg'
 
 function Search(props) {
-  let api_key = "9c67f7e930691492acc3e82b29d1c58d";
+  const [cityName, setCityName] = useState("Delhi");
 
-  const [cityName, setCityName] = useState("");
+  useEffect(() => {
+    handleSearch()
+  }, [])
 
   const handleSearch = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${api_key}`;
-    await fetch(url).then((res) => {
-      return res.json()
-    }).then((data) => {
-      if(data.cod !== 200){
-        return alert(data.message)
-      }
-      props.searchData(data);
-    }).catch((error)=>{
-      console.log(error);
-    })
-    
 
+    const url = "http://localhost:3000/currentWeather";
+    axios.post(url, { cityName: cityName }).then(function (response) {
+      if (response.data.cod !== 200) {
+        return alert(response.data.message)
+      }
+      props.searchData(response.data);
+      props.cityNameData(cityName);
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
-    <div className='search-bar'>
-      <input type="text" name="search-city" id="search-city" onChange={(event) => setCityName(event.target.value)} placeholder='Enter the City...' />
-      <div className="search-icon" onClick={handleSearch}>
-        <img src={Icon} alt="" />
+    <div className='flex items-center justify-center pt-16'>
+      <div className="flex items-center max-w-md mx-auto bg-blue-200 rounded-lg w-1/2 h-16">
+        <div className="w-full">
+          <input type="search" className="w-full px-4 py-1 text-xl text-blue-500 bg-transparent rounded-full focus:outline-none"
+            placeholder="Enter the City Name" onChange={(event) => setCityName(event.target.value)} onKeyDown={(e) => {
+              if (e.key === "Enter")
+                handleSearch();
+            }} />
+        </div>
+        <div>
+          <button type="submit" className={(cityName.length > 0) ? 'flex items-center bg-blue-400 justify-center w-16 h-16 text-white rounded-r-lg bg-blue-400' : 'flex items-center bg-yellow-200 justify-center w-16 h-16 text-white rounded-r-lg bg-blue-200 cursor-not-allowed'}
+            disabled={cityName.length == 0} onClick={handleSearch} onKeyDown={handleSearch}>
+            <img src={Icon} className="w-5 h-5" alt="search" />
+          </button>
+        </div>
       </div>
-    </div>
+    </div >
   )
 }
 

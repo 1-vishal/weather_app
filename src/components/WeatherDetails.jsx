@@ -1,56 +1,57 @@
-import React, { useState } from 'react';
-import Search from './Search';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+// import Search from './Search';
 
 import WeatherDrizzleIcon from '../assets/images/drizzle.png';
 import WeatherHumidityIcon from '../assets/images/humidity.png';
 import WeatherWindIcon from '../assets/images/wind.png';
 
 
-export default function WeatherDetails() {
+export default function WeatherDetails(props) {
 
   const [temp, setTemp] = useState("24")
   const [humidity, setHumidity] = useState("64")
   const [windSpeed, setWindSpeed] = useState("3")
-  const [cityName, setCityName] = useState("London")
+  const [cityName, setCityName] = useState("Delhi")
   const [iconId, setIconId] = useState("04d");
   const [description, setDescription] = useState("Cloudy");
 
-
-  const handleSearchData = (data) => {
-    setTemp(data.main.temp);
-    setHumidity(data.main.humidity);
-    setWindSpeed(data.wind.speed);
-    setCityName(data.name);
-    setIconId(data.weather[0].icon);
-    setDescription(data.weather[0].description);
-  };
+  useEffect(() => {
+    if (props.updateCityWeatherData !== null) {
+      setTemp(props.updateCityWeatherData.main.temp);
+      setHumidity(props.updateCityWeatherData.main.humidity);
+      setWindSpeed(props.updateCityWeatherData.wind.speed);
+      setCityName(props.updateCityWeatherData.name);
+      setIconId(props.updateCityWeatherData.weather[0].icon);
+      setDescription(props.updateCityWeatherData.weather[0].description);
+    }
+  }, [props.updateCityWeatherData]);
 
   return (
-    <div className='weather-container'>
-      <Search searchData={handleSearchData} />
-      <div className="weather-icon">
+    <div className='bg-gradient-to-tr from-blue-100 to-yellow-300 p-4 w-96 rounded-3xl text-blue-400 mr-16 shadow-2xl'>
+      <div className="flex justify-center">
         <img src={`http://openweathermap.org/img/wn/${iconId}@4x.png`} alt="" />
       </div>
-      <div className="temp">{temp}°c</div>
-      <div className="city-name">{cityName}</div>
-      <div className="content">
-        <div className="element">
+      <div className="text-4xl text-center">{temp}°c</div>
+      <div className="text-6xl text-center">{cityName}</div>
+      <div className="p-5">
+        <div className="flex justify-between items-center">
+          <div className="mt-5">
+            <div className="text-4xl">{humidity}%</div>
+            <div className="text-2xl"><u>Humidity</u></div>
+          </div>
           <img src={WeatherHumidityIcon} alt="" />
-          <div className="data">
-            <div className="percent">{humidity}%</div>
-            <div className="text">Humidity</div>
-          </div>
         </div>
-        <div className="element">
-          <img src={WeatherWindIcon} alt="" />
-          <div className="data">
-            <div className="percent">{windSpeed} Km/h</div>
-            <div className="text">Wind Speed</div>
+        <div className="flex justify-between items-center">
+          <div className="mt-5">
+            <div className="text-4xl">{windSpeed} Km/h</div>
+            <div className="text-2xl"><u>Wind Speed</u></div>
           </div>
+          <img src={WeatherWindIcon} alt="" />
         </div>
       </div>
-      <div className="description">{description}
-        </div>
+      <div className="text-5xl capitalize text-center">{description}
+      </div>
     </div>
   )
 }
