@@ -4,25 +4,13 @@ import axios from 'axios';
 import Icon from '../assets/images/searchlogo.svg'
 
 function Search(props) {
-  const [cityName, setCityName] = useState("Delhi");
-
+  const [cityName, setCityName] = useState("");
   useEffect(() => {
     handleSearch()
   }, [])
 
-  const handleSearch = async () => {
-
-    const url = "http://localhost:3000/currentWeather";
-    axios.post(url, { cityName: cityName }).then(function (response) {
-      if (response.data.cod !== 200) {
-        return alert(response.data.message)
-      }
-      props.searchData(response.data);
-      props.cityNameData(cityName);
-    })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const handleSearch = () => {
+    props.handleSearch(cityName);
   }
 
   return (

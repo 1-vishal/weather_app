@@ -28,12 +28,12 @@ export default function WeatherDetails(props) {
   }, [props.updateCityWeatherData]);
 
   return (
-    <div className='bg-gradient-to-tr from-blue-100 to-yellow-300 p-4 w-96 rounded-3xl text-blue-400 mr-16 shadow-2xl'>
+    <div className='bg-gradient-to-tr from-blue-100 to-yellow-300 p-4 w-96 rounded-3xl text-blue-400 mr-16 ml-16 mt-12 shadow-2xl'>
       <div className="flex justify-center">
         <img src={`http://openweathermap.org/img/wn/${iconId}@4x.png`} alt="" />
       </div>
       <div className="text-4xl text-center">{temp}°c</div>
-      <div className="text-6xl text-center">{cityName}</div>
+      <div className="text-6xl text-center">{cityName.toUpperCase()}</div>
       <div className="p-5">
         <div className="flex justify-between items-center">
           <div className="mt-5">
