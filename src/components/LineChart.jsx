@@ -51,7 +51,7 @@ const LineChart = ({ currentWeather3hrData, updateCurrentData }) => {
                 font: {
                     weight: 'bold'
                 },
-                formatter: Math.round,
+                // formatter: ,
                 padding: 4
             },
             legend: {
@@ -82,7 +82,7 @@ const LineChart = ({ currentWeather3hrData, updateCurrentData }) => {
         ),
         datasets: [{
             label: "Weather for every 3 hour of the Day",
-            data: currentWeather3hrData.map((data) => Math.round(data.main.temp)),
+            data: currentWeather3hrData.map((data) => data.main.temp),
             datalabels: {
                 align: 'end',
                 anchor: 'end'
@@ -95,7 +95,7 @@ const LineChart = ({ currentWeather3hrData, updateCurrentData }) => {
 
     return (
         <>
-            <Line data={data} options={options} width={'340px'}/>
+            <Line data={data} options={options} />
         </>
     );
 };

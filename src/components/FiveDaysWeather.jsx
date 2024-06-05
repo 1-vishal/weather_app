@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import LayoutComponent from './LayoutComponent';
 import axios from 'axios';
 
-const FiveDaysWeather = (props) => { 
+const FiveDaysWeather = (props) => {
     return (
         <div className='text-3xl mt-12'>
-            <div className="grid grid-rows-3 grid-flow-col gap-5 w-full">
+            <div className="flex justify-center gap-5 w-full flex-wrap">
                 {props.fiveDaysWeatherData && props.fiveDaysWeatherData.map((dayData, index) => (
                     <div key={index} className="" onClick={() => props.updateCurrentData(dayData)}>
                         <LayoutComponent

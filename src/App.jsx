@@ -136,14 +136,13 @@ function App() {
       <Search handleSearch={handleSearch} />
       <div className='flex justify-center text-6xl m-16 flex-wrap'>
         <WeatherDetails updateCityWeatherData={updateCityWeatherData} />
-        <FiveDaysWeather fiveDaysWeatherData={fiveDaysWeatherData} updateCurrentData={updateCurrentData} />
+        {currentWeather3hrData &&
+          <div className="ml-4 mr-4">
+            <FiveDaysWeather fiveDaysWeatherData={fiveDaysWeatherData} updateCurrentData={updateCurrentData} />
+            <LineChart currentWeather3hrData={currentWeather3hrData} updateCurrentData={updateCurrentData} />
+          </div>
+        }
       </div>
-      <p className='text-3xl text-center pt-5'><u>Weather for every 3 hour of the Day</u></p>
-      {currentWeather3hrData &&
-        <div className="flex justify-center mb-16 ml-4 mr-4">
-          <LineChart currentWeather3hrData={currentWeather3hrData} updateCurrentData={updateCurrentData} />
-        </div>
-      }
       <Footer />
     </div>
   )

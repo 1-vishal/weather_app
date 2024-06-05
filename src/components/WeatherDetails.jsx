@@ -28,7 +28,7 @@ export default function WeatherDetails(props) {
   }, [props.updateCityWeatherData]);
 
   return (
-    <div className='bg-gradient-to-tr from-blue-100 to-yellow-300 p-4 w-96 rounded-3xl text-blue-400 mr-16 ml-16 mt-12 shadow-2xl'>
+    <div className='bg-gradient-to-tr from-blue-100 to-yellow-300 p-4 rounded-3xl text-blue-400 mt-12 shadow-2xl' style={{ width: '340px' }}>
       <div className="flex justify-center">
         <img src={`http://openweathermap.org/img/wn/${iconId}@4x.png`} alt="" />
       </div>
