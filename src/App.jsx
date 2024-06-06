@@ -61,7 +61,7 @@ function App() {
       navigator.geolocation.getCurrentPosition(async (pos) => {
         lat = pos.coords.latitude;
         lon = pos.coords.longitude;
-        const url = "http://localhost:3000/cityNameByPos";
+        const url = "https://weather-api-ayxd.onrender.com/cityNameByPos";
         await axios.post(url, { lat: lat, lon: lon }).then(function (response) {
           if (response) {
             handleSearch(response.data)
@@ -74,7 +74,7 @@ function App() {
   }
   const handleSearch = async (cityVal) => {
     setCityName(cityVal);
-    const url = "http://localhost:3000/currentWeather";
+    const url = "https://weather-api-ayxd.onrender.com/currentWeather";
     await axios.post(url, { cityName: cityVal !== "" ? cityVal : cityName }).then(function (response) {
       if (response.data.cod !== 200) {
         return alert(response.data.message)
@@ -87,7 +87,7 @@ function App() {
       });
   }
   const apiCall = async (cityNameVal) => {
-    const url = "http://localhost:3000/fiveDaysWeather";
+    const url = "https://weather-api-ayxd.onrender.com/fiveDaysWeather";
     try {
       const response = await axios.post(url, { cityName: cityNameVal });
       let result = [];
