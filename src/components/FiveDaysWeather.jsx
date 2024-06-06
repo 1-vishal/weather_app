@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LayoutComponent from './LayoutComponent';
-import axios from 'axios';
+import LayoutComponent from './layoutComponent';
 
 const FiveDaysWeather = (props) => {
     return (
